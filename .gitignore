@@ -4,5 +4,3 @@ netlify/functions/server/build
 .netlify
 .env
 public/build
-message-signing/rust/target
-message-signing/rust/pkg

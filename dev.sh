@@ -5,4 +5,4 @@ npm run build
 cp message-signing/rust/pkg/emurgo_message_signing_bg.wasm netlify/functions/server/build/emurgo_message_signing_bg.wasm
 
 # start
-npm start
+npx concurrently "npm:start" "npm:dev:netlify"
