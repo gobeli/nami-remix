@@ -1,0 +1,38 @@
+{
+  "private": true,
+  "name": "remix-app-template",
+  "description": "",
+  "license": "",
+  "scripts": {
+    "prestart": "cp message-signing/rust/pkg/emurgo_message_signing_bg.wasm netlify/functions/server/build/emurgo_message_signing_bg.wasm",
+    "start": "node -r dotenv/config node_modules/.bin/remix dev",
+    "build": "remix build",
+    "dev": "remix watch",
+    "postinstall": "remix setup node",
+    "dev:netlify": "cross-env NODE_ENV=development netlify dev"
+  },
+  "dependencies": {
+    "@blockfrost/blockfrost-js": "^2.0.2",
+    "@emurgo/cardano-serialization-lib-nodejs": "^9.1.2",
+    "@netlify/functions": "^0.7.2",
+    "@remix-run/netlify": "^1.0.6",
+    "@remix-run/react": "^1.0.6",
+    "dotenv": "^10.0.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "remix": "^1.0.6"
+  },
+  "devDependencies": {
+    "@remix-run/dev": "^1.0.6",
+    "@remix-run/serve": "^1.0.6",
+    "@types/react": "^17.0.24",
+    "@types/react-dom": "^17.0.9",
+    "buffer": "^6.0.3",
+    "cross-env": "^7.0.3",
+    "typescript": "^4.1.2"
+  },
+  "engines": {
+    "node": ">=14"
+  },
+  "sideEffects": false
+}

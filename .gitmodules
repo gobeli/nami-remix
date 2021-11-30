@@ -1,0 +1,3 @@
+[submodule "message-signing"]
+	path = message-signing
+	url = git@github.com:Emurgo/message-signing.git

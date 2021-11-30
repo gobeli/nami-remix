@@ -1,0 +1,8 @@
+node_modules
+.cache
+netlify/functions/server/build
+.netlify
+.env
+public/build
+message-signing/rust/target
+message-signing/rust/pkg
