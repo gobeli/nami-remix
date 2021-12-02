@@ -1,10 +1,10 @@
 import { ActionFunction, LoaderFunction, redirect, useSubmit,  } from "remix";
-import { verify, VerifyRequest } from "~/util/cardano.server";
+import { bech32AddressFromHex, verify, VerifyRequest } from "~/util/cardano.server";
 import { toHex } from "~/util/cardano";
-import { createUserSession, getUserSession } from "~/util/session.server";
+import { createUserSession, getUserId } from "~/util/session.server";
 
 export let loader: LoaderFunction = async ({ request }) => {
-  const session = await getUserSession(request);
+  const session = await getUserId(request);
   if (session) {
     return redirect('/account/profile');
   }
@@ -25,7 +25,7 @@ export let action: ActionFunction = async ({ request }) => {
     return { success, message: 'Verification failed!' }
   }
 
-  return createUserSession(verifyRequest.address, '/account/profile');
+  return createUserSession(bech32AddressFromHex(verifyRequest.address), '/account/profile');
 }
 
 export default function Account() {

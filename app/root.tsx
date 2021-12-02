@@ -2,16 +2,25 @@ import {
   Link,
   Links,
   LiveReload,
+  LoaderFunction,
   Meta,
   Outlet,
   Scripts,
   ScrollRestoration,
-  useCatch
+  useCatch,
+  useLoaderData
 } from "remix";
 import type { LinksFunction } from "remix";
 
 import globalStylesUrl from "~/styles/global.css";
 import darkStylesUrl from "~/styles/dark.css";
+import SmallAddress from "./components/SmallAddress";
+import { getUserId } from "./util/session.server";
+
+export let loader: LoaderFunction = async ({ request }) => {
+  const session = await getUserId(request);
+  return session;
+}
 
 // https://remix.run/api/app#links
 export let links: LinksFunction = () => {
@@ -28,9 +37,11 @@ export let links: LinksFunction = () => {
 // https://remix.run/api/conventions#default-export
 // https://remix.run/api/conventions#route-filenames
 export default function App() {
+  const userId = useLoaderData<string>();
+
   return (
     <Document>
-      <Layout>
+      <Layout userId={userId}>
         <Outlet />
       </Layout>
     </Document>
@@ -119,7 +130,7 @@ function Document({
   );
 }
 
-function Layout({ children }: { children: React.ReactNode }) {
+function Layout({ children, userId }: { children: React.ReactNode, userId: string }) {
   return (
     <div className="remix-app">
       <header className="remix-app__header">
@@ -131,6 +142,11 @@ function Layout({ children }: { children: React.ReactNode }) {
             <ul>
               <li>
                 <Link to="/">Home</Link>
+              </li>
+              <li>
+                {userId 
+                  ? <Link to="/account/profile"><SmallAddress value={userId} /></Link>
+                  : <Link to="/account/login">Connect</Link>}
               </li>
             </ul>
           </nav>

@@ -5,7 +5,7 @@
   "license": "",
   "scripts": {
     "prestart": "cp message-signing/rust/pkg/emurgo_message_signing_bg.wasm netlify/functions/server/build/emurgo_message_signing_bg.wasm",
-    "start": "node -r dotenv/config node_modules/.bin/remix dev",
+    "start": "remix watch",
     "build": "remix build",
     "dev": "remix watch",
     "postinstall": "remix setup node",
